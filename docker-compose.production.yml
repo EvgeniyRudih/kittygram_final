@@ -9,25 +9,28 @@ services:
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
+
   backend:
-    build: ./backend/
+    image: ffreemann/kittygram_backend:latest
     env_file: .env
     volumes:
       - static:/app/static
       - media:/app/media
     depends_on:
       - db
+
   frontend:
+    image: ffreemann/kittygram_frontend:latest
     env_file: .env
-    build: ./frontend/
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static
+
   gateway:
-    build: ./nginx/
+    image: ffreemann/kittygram_gateway:latest
     env_file: .env
     ports:
-      - 9000:80
+      - "9000:80"
     volumes:
       - static:/static
       - media:/media
