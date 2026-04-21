@@ -1,6 +1,7 @@
 # flake8: noqa
 import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -11,8 +12,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'default-insecure-key')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-allowed_hosts = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1')
-ALLOWED_HOSTS = allowed_hosts.split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -106,7 +106,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = BASE_DIR / 'collected_static'
+STATIC_ROOT = '/app/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
